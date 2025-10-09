@@ -10,7 +10,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none
+            user-select: none;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, .2) rgba(20, 20, 20, .8)
         }
 
         html {
@@ -40,11 +42,6 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, .4)
-        }
-
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, .2) rgba(20, 20, 20, .8)
         }
 
         .bg {
@@ -185,45 +182,51 @@
         }
 
         .nav-container {
-            max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 2vw;
             display: flex;
             justify-content: space-between;
-            align-items: center
+            align-items: center;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
         }
 
         .logo {
-            font-size: 26px;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             font-weight: 800;
             background: linear-gradient(135deg, #fff 0%, #999 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 10px;
-            letter-spacing: -1px
+            gap: 0.5em;
+            letter-spacing: -1px;
+            white-space: nowrap;
         }
 
         .nav-btn {
-            padding: 10px 24px;
-            border: 1px solid rgba(255, 255, 255, .25);
-            background: rgba(40, 40, 40, .7);
+            padding: clamp(0.35em, 0.8vw, 0.6em) clamp(0.8em, 2vw, 1.2em);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(40, 40, 40, 0.7);
             color: #fff;
-            font-size: 14px;
+            font-size: clamp(0.8rem, 1vw, 1rem);
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
-            transition: all .2s;
             text-decoration: none;
-            display: inline-block
+            display: inline-block;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, 0.15);
             border-color: #fff;
-            transform: translateY(-2px)
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
         }
+
 
         .hero {
             min-height: 35vh;
@@ -335,37 +338,79 @@
 
         .executor-header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            gap: 12px
+            align-items: center;
+            gap: 12px;
         }
 
         .executor-name {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff
+            margin-right: auto;
+            min-width: 0;
+        }
+
+        .executor-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
         }
 
         .executor-badge {
+            white-space: nowrap;
             padding: 4px 12px;
             border-radius: 4px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: .5px
+            letter-spacing: .5px;
+            flex-shrink: 0;
         }
 
         .badge-freemium {
-            background: rgba(59, 130, 246, .2);
-            color: #3b82f6;
+            background: rgba(92, 96, 102, 0.2);
+            color: #ffffff;
             border: 1px solid rgba(59, 130, 246, .3)
+        }
+
+        .badge-free {
+            background: rgba(16, 185, 129, 0.25);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
         }
 
         .badge-paid {
             background: rgba(255, 215, 0, .2);
             color: #FFD700;
             border: 1px solid rgba(255, 215, 0, .3)
+        }
+
+        .badge-recommended {
+            background: rgba(34, 197, 94, .2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, .3);
+        }
+
+        .badge-untested {
+            background: rgba(255, 165, 0, .15);
+            color: #ffa500;
+            border: 1px solid rgba(255, 165, 0, .25);
+        }
+
+        .badge-beta {
+            background: rgba(168, 85, 247, .2);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, .3);
+        }
+
+        .badge-deprecated {
+            background: rgba(239, 68, 68, .15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, .25);
+        }
+
+        .badge-elite {
+            background: linear-gradient(135deg, rgba(255, 215, 0, .25), rgba(59, 130, 246, .25));
+            color: #FFD700;
+            border: 1px solid rgba(255, 255, 255, .3);
         }
 
         .executor-price {
@@ -519,9 +564,7 @@
             <div class="platform-header">
                 <span class="platform-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" class="mac-icon" width="16" height="16" fill="currentColor"
-                        class="bi bi-apple" viewBox="0 0 16 16">
-                        <path
-                            d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+                        viewBox="0 0 16 16">
                         <path
                             d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
                     </svg>
@@ -532,7 +575,11 @@
                 <div class="executor-card">
                     <div class="executor-header">
                         <h3 class="executor-name">Hydrogen</h3>
-                        <span class="executor-badge badge-freemium">Freemium</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                            <span class="executor-badge badge-elite">Elite</span>
+                            <span class="executor-badge badge-recommended">Recommended</span>
+                        </div>
                     </div>
                     <p class="executor-description">Clean, fast, and reliable executor for Mac users.</p>
                     <ul class="executor-features">
@@ -542,13 +589,28 @@
                     </ul>
                     <a href="https://hydrogen.lat" target="_blank" class="executor-link">Visit Hydrogen →</a>
                 </div>
+                <div class="executor-card">
+                    <div class="executor-header">
+                        <h3 class="executor-name">Ronix</h3>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="executor-description">Solid and versatile executor for Mac.</p>
+                    <ul class="executor-features">
+                        <li>Similar to Hydrogen</li>
+                        <li>Regular updates</li>
+                        <li>Active Discord</li>
+                    </ul>
+                    <a href="https://ronixstudios.com" target="_blank" class="executor-link">Visit Ronix →</a>
+                </div>
             </div>
         </div>
         <div class="platform-section">
             <div class="platform-header">
                 <span class="platform-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-windows" viewBox="0 0 16 16">
+                        viewBox="0 0 16 16">
                         <path
                             d="M6.555 1.375 0 2.237v5.45h6.555zM0 13.795l6.555.933V8.313H0zm7.278-5.4.026 6.378L16 16V8.395zM16 0 7.33 1.244v6.414H16z" />
                     </svg>
@@ -559,7 +621,9 @@
                 <div class="executor-card">
                     <div class="executor-header">
                         <h3 class="executor-name">Wave</h3>
-                        <span class="executor-badge badge-freemium">Freemium</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                        </div>
                     </div>
                     <p class="executor-description">Simple, stable, and no-nonsense executor.</p>
                     <ul class="executor-features">
@@ -569,10 +633,27 @@
                     </ul>
                     <a href="https://getwave.gg/" target="_blank" class="executor-link">Visit Wave →</a>
                 </div>
+                <div class="executor-card">
+                    <div class="executor-header">
+                        <h3 class="executor-name">Xeno</h3>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-free">Free</span>
+                        </div>
+                    </div>
+                    <p class="executor-description">EXTERNAL executor.</p>
+                    <ul class="executor-features">
+                        <li>Minimal resource usage</li>
+                        <li>Decent interface</li>
+                        <li>Easy to use</li>
+                    </ul>
+                    <a href="https://www.xeno.onl/" target="_blank" class="executor-link">Visit Xeno →</a>
+                </div>
                 <div class="executor-card premium">
                     <div class="executor-header">
                         <h3 class="executor-name">Zenith</h3>
-                        <span class="executor-badge badge-paid">Paid</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-paid">Paid</span>
+                        </div>
                     </div>
                     <p class="executor-price">$19.99/month</p>
                     <p class="executor-description">Premium polish and performance.</p>
@@ -586,7 +667,9 @@
                 <div class="executor-card">
                     <div class="executor-header">
                         <h3 class="executor-name">Volcano</h3>
-                        <span class="executor-badge badge-freemium">Freemium</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                        </div>
                     </div>
                     <p class="executor-description">Feature-rich with frequent updates.</p>
                     <ul class="executor-features">
@@ -602,7 +685,7 @@
             <div class="platform-header">
                 <span class="platform-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-android2" viewBox="0 0 16 16">
+                        viewBox="0 0 16 16">
                         <path
                             d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68" />
                     </svg>
@@ -613,7 +696,9 @@
                 <div class="executor-card warning">
                     <div class="executor-header">
                         <h3 class="executor-name">KRNL</h3>
-                        <span class="executor-badge badge-freemium">Freemium</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                        </div>
                     </div>
                     <p class="executor-price">4 Checkpoints</p>
                     <p class="executor-description">Mobile executor with parser issues.</p>
@@ -634,25 +719,59 @@
                 <div class="executor-card">
                     <div class="executor-header">
                         <h3 class="executor-name">Delta</h3>
-                        <span class="executor-badge badge-freemium">Freemium</span>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-freemium">Freemium</span>
+                            <span class="executor-badge badge-recommended">Recommended</span>
+                        </div>
                     </div>
-                    <p class="executor-price">1 Checkpoint</p>
-                    <p class="executor-description">Smooth, clean, better mobile pick.</p>
+                    <p class="executor-description">Stable mobile executor.</p>
                     <ul class="executor-features">
-                        <li>Single checkpoint</li>
-                        <li>Better stability</li>
-                        <li>Script compatible</li>
+                        <li>Reliable scripts</li>
+                        <li>Regular updates</li>
+                        <li>Supports Android & iOS</li>
                     </ul>
-                    <a href="https://deltaexploits.gg/" target="_blank" class="executor-link">Visit Delta →</a>
+                    <a href="https://delta.app" target="_blank" class="executor-link">Visit Delta →</a>
+                </div>
+                <div class="executor-card">
+                    <div class="executor-header">
+                        <h3 class="executor-name">Ronix</h3>
+                        <div class="executor-badges">
+                            <span class="executor-badge badge-recommended">Recommended</span>
+                        </div>
+                    </div>
+                    <p class="executor-description">Mobile-friendly Ronix executor.</p>
+                    <ul class="executor-features">
+                        <li>Android ONLY compatible</li>
+                        <li>Frequent updates</li>
+                        <li>Lightweight</li>
+                    </ul>
+                    <a href="https://ronixstudios.com" target="_blank" class="executor-link">Visit Ronix →</a>
                 </div>
             </div>
         </div>
+        <div style="text-align:center; margin:60px 0;">
+            <a href="https://whatexpsare.online/" target="_blank"
+                style="display:inline-block; padding:16px 40px; font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#fff; background: linear-gradient(135deg, #4CAF50, #2E7D32); border-radius:10px; text-decoration:none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                Explore What Exploits Are Online →
+            </a>
+        </div>
+
     </div>
     <footer>
         <p>© 2025 Simple Scripts. All rights reserved.</p>
     </footer>
     <script>
-        const s = document.getElementById('stars'), f = document.createDocumentFragment(); for (let i = 0; i < 50; i++) { const e = document.createElement('div'); e.className = 'star'; e.style.left = Math.random() * 100 + '%'; e.style.top = Math.random() * 100 + '%'; e.style.animationDelay = Math.random() * 3 + 's'; f.appendChild(e) } s.appendChild(f);
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 120; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 2 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.opacity = Math.random();
+            starsContainer.appendChild(star);
+        }
     </script>
 </body>
 
